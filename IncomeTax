@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Tax Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1558346648-9757f2fa4474?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D') center center fixed;
+            background-size: cover;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #calculator {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            max-width: 400px;
+            width: 100%;
+            color: #333;
+        }
+
+        #header {
+            background: url('https://i.pinimg.com/originals/03/b0/a2/03b0a2b0b7509577f27c7df208d26319.jpg') center center fixed;
+            background-size: cover;
+            color: white;
+            padding: 20px;
+        }
+
+        #content {
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-align: left;
+            color: #555;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 180px;
+            left: 380px;
+            background-color: #990099;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3%;
+        }
+        
+        button {
+            background-color: #660066;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #232526;
+        }
+
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #660066;
+        }
+    </style>
+</head>
+<body>
+
+<div id="calculator">
+    <div id="header">
+        <h2>Income Tax</h2>
+    </div>
+    <div id="content">
+        <form id="incomeTaxForm">
+            <label for="income">Taxable Income:</label>
+            <input type="number" id="income" name="income" required>
+            <button class="back-button" onclick="window.location.href='index.html'")">&#8249;</button>
+            <button type="button" onclick="calculateIncomeTax()">Calculate Income Tax</button>
+        </form>
+
+        
+
+        <div id="result"></div>
+    </div>
+</div>
+
+<script>
+    function calculateIncomeTax() {
+        var income = parseFloat(document.getElementById("income").value);
+        var tax = 0;
+
+        if (income <= 250000) {
+            tax = 0;
+        } else if (income <= 400000) {
+            tax = (income - 250000) * 0.2;
+        } else if (income <= 800000) {
+            tax = 14000 + (income - 400000) * 0.25;
+        } else if (income <= 2000000) {
+            tax = 60000 + (income - 800000) * 0.3;
+        } else if (income <= 8000000) {
+            tax = 169000 + (income - 2000000) * 0.32;
+        } else {
+            tax = 618000 + (income - 8000000) * 0.35;
+        }
+
+        document.getElementById("result").innerHTML = "Income Tax: PHP " + tax.toFixed(2);
+    }
+</script>
+
+</body>
+</html>
