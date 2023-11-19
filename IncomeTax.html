@@ -124,13 +124,13 @@
 
         if (income <= 250000) {
             tax = 0;
-        } else if (250000 < income <= 400000) {
+        } else if (< income <= 400000) {
             tax = (income - 250000) * 0.2;
-        } else if (400000 < income <= 800000) {
+        } else if (income <= 800000) {
             tax = ((income - 400000) * 0.25) + 30000;
-        } else if (800000 < income <= 2000000) {
+        } else if (income <= 2000000) {
             tax = ((income - 800000) * 0.3) + 130000;
-        } else if (2000000 < income <= 8000000) {
+        } else if (income <= 8000000) {
             tax = ((income - 2000000) * 0.32) + 490000;
         } else {
             tax = ((income - 8000000) * 0.35) + 2410000;
