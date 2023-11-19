@@ -124,16 +124,16 @@
 
         if (income <= 250000) {
             tax = 0;
-        } else if (income <= 400000) {
+        } else if (250000 < income <= 400000) {
             tax = (income - 250000) * 0.2;
-        } else if (income <= 800000) {
-            tax = 14000 + (income - 400000) * 0.25;
-        } else if (income <= 2000000) {
-            tax = 60000 + (income - 800000) * 0.3;
-        } else if (income <= 8000000) {
-            tax = 169000 + (income - 2000000) * 0.32;
+        } else if (400000 < income <= 800000) {
+            tax = 30000 + (income - 400000) * 0.25;
+        } else if (800000 < income <= 2000000) {
+            tax = 130000 + (income - 800000) * 0.3;
+        } else if (2000000 < income <= 8000000) {
+            tax = 490000 + (income - 2000000) * 0.32;
         } else {
-            tax = 618000 + (income - 8000000) * 0.35;
+            tax = 2410000 + (income - 8000000) * 0.35;
         }
 
         document.getElementById("result").innerHTML = "Income Tax: PHP " + tax.toFixed(2);
