@@ -16,7 +16,6 @@
             justify-content: center;
             height: 100vh;
         }
-
         #calculator {
             background-color: #fff;
             border-radius: 10px;
@@ -26,18 +25,15 @@
             width: 100%;
             color: #333;
         }
-
         #header {
             background: url('https://i.pinimg.com/564x/59/6f/d8/596fd8cc28ba9f9a674ba30c5c02a541.jpg') center center fixed;
             
             color: #336633;
             padding: 20px;
         }
-
         #content {
             padding: 20px;
         }
-
         label {
             display: block;
             font-weight: bold;
@@ -45,7 +41,6 @@
             text-align: left;
             color: #555;
         }
-
         input {
             width: calc(100% - 20px);
             padding: 12px;
@@ -54,7 +49,6 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
         .back-button {
             position: fixed;
             top: 180px;
@@ -83,12 +77,9 @@
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
-
         button:hover {
             background-color: #232526;
         }
-
-
         #result {
             margin-top: 20px;
             font-size: 18px;
@@ -101,6 +92,7 @@
 
 <div id="calculator">
     <div id="header">
+       
         <h2> <mark style="background-color:white; color:#336600">Income Tax</mark></h2>
     </div>
     <div id="content">
@@ -110,21 +102,17 @@
             <button class="back-button" onclick="window.location.href='index.html'")">&#8249;</button>
             <button type="button" onclick="calculateIncomeTax()">Calculate Income Tax</button>
         </form>
-
         
-
         <div id="result"></div>
     </div>
 </div>
-
 <script>
     function calculateIncomeTax() {
         var income = parseFloat(document.getElementById("income").value);
         var tax = 0;
-
-        if (income <= 250000) {
+         if (income <= 250000) {
             tax = 0;
-        } else if (< income <= 400000) {
+        } else if (income <= 400000) {
             tax = (income - 250000) * 0.2;
         } else if (income <= 800000) {
             tax = ((income - 400000) * 0.25) + 30000;
@@ -135,10 +123,8 @@
         } else {
             tax = ((income - 8000000) * 0.35) + 2410000;
         }
-
         document.getElementById("result").innerHTML = "Income Tax: PHP " + tax.toFixed(2);
     }
 </script>
-
 </body>
 </html>
