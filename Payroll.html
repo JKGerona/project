@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+  background: url('https://static.vecteezy.com/system/resources/previews/023/326/915/non_2x/skyscraper-with-sunrise-sky-background-illustration-have-blank-space-buildings-silhouette-against-the-sky-in-the-morning-flat-design-vector.jpg');
+  background-size: cover;
+}
+
+.sidepanel  {
+  width: 1000;
+  position: fixed;
+  z-index: 1;
+  height: 889px;
+  top: 0;
+  left: 0;
+  background-color: #fdf5e6;
+  overflow-x: hidden;
+  transition: 1s;
+  padding-top: 60px;
+  border: solid 3px;
+}
+
+h1 {
+            color: #333;
+            font-family: 'Times New Roman', Times, serif;
+            
+        }
+h2 {
+            color: #333;
+            font-family: 'Times New Roman', Times, serif;
+            margin-top: 370px;
+        }
+        
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 35px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidepanel a:hover {
+  color: #fdf5e6;
+}
+
+.text{
+	color: black;
+    font-family: 'Times New Roman', Times, serif;
+    font-size:20px;
+    
+    }
+.buttonnikenet{
+margin-top: 10px;
+margin-left: 100px;
+background-color: #5C4033;
+color: white;
+}
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color:#fdf5e6;
+  color: black;
+  transition: 0.3s;
+}
+table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            background-color: #fdf5e6;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 50x;
+            right: 50px;
+            background-color: #111;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5%;
+        }
+
+</style>
+</head>
+<body>
+
+<div id="mySidepanel" class="sidepanel">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">X</a>
+  <h1>Add Employee</h1>
+        <label class="text" for="employeeName">Employee Name:</label>
+        <input type="text" id="employeeName"><br>
+
+        <label class="text" for="daysWorked">Days Worked:</label>
+        <input type="number" id="daysWorked"><br>
+
+        <label class="text" for="dailyRate">Daily Rate:</label>
+        <input type="number" id="dailyRate"><br>
+
+        <label class="text" for="deductionAmount">Deduction Amount:</label>
+        <input type="number" id="deductionAmount"><br>
+
+        <button class="buttonnikenet" onclick="addEmployee()">Add Employee</button>
+
+        <h2>DeleteEmployee</h2>
+        <label for="deleteLineNumber">Employee Number to Delete:</label>
+        <input type="number" id="deleteLineNumber"><br>
+
+        <button class="buttonnikenet" onclick="deleteEmployee()">Delete Employee</button>
+</div>
+
+<button class="openbtn" onclick="openNav()">Add Employee</button>  
+<button class="back-button" onclick="window.location.href='index.html'")">&#8249;</button>
+
+<div id="payrollTable">
+        <h1>Payroll List</h1>
+        <table id="payrollListTable">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Employee Name</th>
+                    <th>Days Worked</th>
+                    <th>Daily Rate</th>
+                    <th>Gross Pay</th>
+                    <th>Deduction Amount</th>
+                    <th>Net Pay</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Payroll list will be displayed here -->
+            </tbody>
+        </table>
+    </div>
+<script>
+function openNav() {
+  document.getElementById("mySidepanel").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidepanel").style.width = "0";
+}
+
+let payrollList = [];
+
+        function addEmployee() {
+            const name = document.getElementById("employeeName").value;
+            const daysWorked = parseInt(document.getElementById("daysWorked").value);
+            const dailyRate = parseInt(document.getElementById("dailyRate").value);
+            const deductionAmount = parseInt(document.getElementById("deductionAmount").value);
+
+            const grossPay = daysWorked * dailyRate;
+            const netPay = grossPay - deductionAmount;
+
+            payrollList.push({
+                name,
+                daysWorked,
+                dailyRate,
+                grossPay,
+                deductionAmount,
+                netPay
+            });
+
+            displayPayrollList();
+        }
+
+        function deleteEmployee() {
+            const lineNumber = parseInt(document.getElementById("deleteLineNumber").value);
+            if (lineNumber >= 1 && lineNumber <= payrollList.length) {
+                payrollList.splice(lineNumber - 1, 1);
+                displayPayrollList();
+            } else {
+                alert("Invalid line number. Please try again.");
+            }
+        }
+
+        function displayPayrollList() {
+            const tableBody = document.getElementById("payrollListTable").getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
+
+            payrollList.forEach((employee, index) => {
+                const row = tableBody.insertRow();
+                const cellNumber = row.insertCell(0);
+                const cellName = row.insertCell(1);
+                const cellDaysWorked = row.insertCell(2);
+                const cellDailyRate = row.insertCell(3);
+                const cellGrossPay = row.insertCell(4);
+                const cellDeductionAmount = row.insertCell(5);
+                const cellNetPay = row.insertCell(6);
+
+                cellNumber.textContent = index + 1;
+                cellName.textContent = employee.name;
+                cellDaysWorked.textContent = employee.daysWorked;
+                cellDailyRate.textContent = employee.dailyRate;
+                cellGrossPay.textContent = employee.grossPay;
+                cellDeductionAmount.textContent = employee.deductionAmount;
+                cellNetPay.textContent = employee.netPay;
+            });
+        }
+</script>
+   
+</body>
+</html> 
