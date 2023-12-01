@@ -104,10 +104,10 @@
 
   <script>
     function calculate() {
-      // Get the input value
+      // input
       var n = parseInt(document.getElementById("numberInput").value);
 
-      // Calculate factorial using a while loop
+      // factorial
       var factorial = 1;
       var i = 1;
       while (i <= n) {
@@ -115,22 +115,20 @@
         i++;
       }
 
-      // Calculate the sum using a do-while loop
+      // sum
       var sum = 0;
       var j = 1;
-      var t = 1;
       do {
-        t *= j;
-        sum += t;
+        sum += j;
         j++;
       } while (j <= n);
 
-      // Calculate the average using a for loop
+      // average
       var average = 0;
       average = sum
       average /= n;
 
-      // Display the results
+      // Display
       document.getElementById("factorialResult").innerText = "Factorial: " + factorial;
       document.getElementById("sumResult").innerText = "Sum: " + sum;
       document.getElementById("averageResult").innerText = "Average: " + average.toFixed(2);
