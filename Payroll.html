@@ -114,6 +114,32 @@ table {
             width: 2.5%;
         }
 
+        .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-color: white;
+}
+
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 10%;
+  font-color: white;
+}
+
+button {
+  margin: 5px;
+}
+
 </style>
 </head>
 <body>
@@ -139,7 +165,7 @@ table {
         <label for="deleteLineNumber">Employee Number to Delete:</label>
         <input type="number" id="deleteLineNumber"><br>
 
-        <button class="buttonnikenet" onclick="deleteEmployee()">Delete Employee</button>
+        <button class="buttonnikenet" onclick="confirmDeleteEmployee()">Delete Employee</button>
 </div>
 
 <button class="openbtn" onclick="openNav()">Add Employee</button>  
@@ -160,11 +186,20 @@ table {
                 </tr>
             </thead>
             <tbody>
-                <!-- Payroll list will be displayed here -->
+                
             </tbody>
         </table>
     </div>
+
+    <div id="deleteConfirmationModal" class="modal">
+  <div class="modal-content">
+    <p>Are you sure you want to delete this employee?</p>
+    <button class="buttonnikenet" onclick="deleteEmployee()">Yes</button>
+    <button onclick="closeDeleteConfirmationModal()">No</button>
+  </div>
+</div>
 <script>
+
 function openNav() {
   document.getElementById("mySidepanel").style.width = "250px";
 }
@@ -196,15 +231,31 @@ let payrollList = [];
             displayPayrollList();
         }
 
-        function deleteEmployee() {
-            const lineNumber = parseInt(document.getElementById("deleteLineNumber").value);
-            if (lineNumber >= 1 && lineNumber <= payrollList.length) {
-                payrollList.splice(lineNumber - 1, 1);
-                displayPayrollList();
-            } else {
-                alert("Invalid line number. Please try again.");
-            }
-        }
+        function confirmDeleteEmployee() {
+ 
+  const modal = document.getElementById("deleteConfirmationModal");
+  modal.style.display = "block";
+}
+
+function deleteEmployee() {
+ 
+  closeDeleteConfirmationModal();
+
+  const lineNumber = parseInt(document.getElementById("deleteLineNumber").value);
+
+  if (lineNumber >= 1 && lineNumber <= payrollList.length) {
+    payrollList.splice(lineNumber - 1, 1);
+    displayPayrollList();
+  } else {
+    alert("Invalid line number. Please try again.");
+  }
+}
+
+function closeDeleteConfirmationModal() {
+  
+  const modal = document.getElementById("deleteConfirmationModal");
+  modal.style.display = "none";
+}
 
         function displayPayrollList() {
             const tableBody = document.getElementById("payrollListTable").getElementsByTagName('tbody')[0];
